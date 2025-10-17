@@ -1,8 +1,9 @@
-[gd_scene load_steps=6 format=3 uid="uid://ccg0fovek0xwq"]
+[gd_scene load_steps=7 format=3 uid="uid://ccg0fovek0xwq"]
 
 [ext_resource type="PackedScene" uid="uid://cli4gcnwsuadq" path="res://scenes/player.tscn" id="1_2q6dc"]
 [ext_resource type="Script" uid="uid://bkv38cw3tjat0" path="res://scenes/level.gd" id="1_mx8sn"]
 [ext_resource type="Texture2D" uid="uid://dfohgtj3cjd46" path="res://graphics/other/bg.png" id="1_w7c3h"]
+[ext_resource type="PackedScene" uid="uid://r84tg4nwnnj3" path="res://scenes/ui.tscn" id="4_mx8sn"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_w8frs"]
 size = Vector2(149, 823)
@@ -17,11 +18,13 @@ script = ExtResource("1_mx8sn")
 position = Vector2(693.09094, 356.00003)
 scale = Vector2(1.7270509, 1.5728952)
 texture = ExtResource("1_w7c3h")
+metadata/_edit_lock_ = true
 
 [node name="Player" parent="." instance=ExtResource("1_2q6dc")]
 position = Vector2(667, 673)
 
 [node name="Borders" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Borders"]
 collision_layer = 4
@@ -58,8 +61,12 @@ wait_time = 0.3
 autostart = true
 
 [node name="meteors" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
 
 [node name="lasers" type="Node2D" parent="."]
+metadata/_edit_lock_ = true
+
+[node name="UI" parent="." instance=ExtResource("4_mx8sn")]
 
 [connection signal="laser" from="Player" to="." method="_on_player_laser"]
 [connection signal="timeout" from="MeteorTimer" to="." method="_on_meteor_timer_timeout"]
