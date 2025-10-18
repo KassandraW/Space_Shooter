@@ -4,6 +4,7 @@ var rotation_speed: int
 var direction_x:float
 
 signal collision 
+var can_collide := true
 
 func _ready():
 	var rng := RandomNumberGenerator.new()
@@ -23,10 +24,28 @@ func _ready():
 	speed = rng.randi_range(300,700)
 	rotation_speed = rng.randi_range(40,100)
 	
+
+		
+	
 	
 func _process(delta):
 	position += Vector2(direction_x, 1.0) * delta * speed
 	rotation_degrees += rotation_speed * delta
+	
+	if position.y > 800:
+		queue_free()
 
-func _on_body_entered(body: Node2D) -> void:
-	collision.emit()
+func _on_body_entered(_body: Node2D) -> void:
+	if can_collide:
+		collision.emit()
+
+
+func _on_area_entered(area: Area2D) -> void:
+	if can_collide:
+		area.queue_free()
+		$meteorExplosion.play()
+		$Sprite2D.hide()
+	can_collide = false
+	await get_tree().create_timer(0.5).timeout
+	queue_free()
+	

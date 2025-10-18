@@ -1,13 +1,18 @@
-[gd_scene load_steps=3 format=3 uid="uid://cli4gcnwsuadq"]
+[gd_scene load_steps=6 format=3 uid="uid://cli4gcnwsuadq"]
 
 [ext_resource type="Script" uid="uid://jd1vkuvdyvj5" path="res://scenes/player.gd" id="1_g2els"]
-[ext_resource type="Texture2D" uid="uid://cxbwgfph0mnt6" path="res://graphics/ship/ship_bases/PNGs/Main Ship - Base - Full health.png" id="2_g2els"]
+[ext_resource type="Texture2D" uid="uid://cxbwgfph0mnt6" path="res://graphics/ship/4.png" id="2_g2els"]
+[ext_resource type="AudioStream" uid="uid://bva6n367j05e1" path="res://audio/shoot_laser.mp3" id="3_qhqgy"]
+[ext_resource type="AudioStream" uid="uid://bnu2t2hjdnmam" path="res://audio/player_hit.mp3" id="4_dqkch"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_dqkch"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_mask = 6
 script = ExtResource("1_g2els")
 
 [node name="PlayerImage" type="Sprite2D" parent="."]
+material = SubResource("ShaderMaterial_dqkch")
 scale = Vector2(2.8215425, 2.8215425)
 texture = ExtResource("2_g2els")
 
@@ -24,5 +29,13 @@ gizmo_extents = 19.2
 
 [node name="LaserTimer" type="Timer" parent="."]
 wait_time = 0.2
+
+[node name="laser_sound" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_qhqgy")
+volume_db = -20.0
+
+[node name="player_hit" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("4_dqkch")
+volume_db = -20.0
 
 [connection signal="timeout" from="LaserTimer" to="." method="_on_shoot_timer_timeout"]

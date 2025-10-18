@@ -14,10 +14,18 @@ config/name="space_shooter"
 run/main_scene="uid://ccg0fovek0xwq"
 config/features=PackedStringArray("4.5", "Forward Plus")
 
+[autoload]
+
+Global="*res://global/global.gd"
+
 [display]
 
 window/size/viewport_width=1280
 window/size/viewport_height=720
+
+[global_group]
+
+ui=""
 
 [input]
 

@@ -22,6 +22,10 @@ func _process(_delta: float) -> void:
 		laser.emit($Laser1Startposition.global_position, $Laser2Startposition.global_position )
 		$LaserTimer.start()
 		can_shoot = false
+		$laser_sound.play()
 
 func _on_shoot_timer_timeout() -> void:
 	can_shoot = true # Replace with function body.
+	
+func play_collision_sound():
+	$player_hit.play()
